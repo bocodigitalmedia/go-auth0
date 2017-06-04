@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/bocodigitalmedia/auth0/auth0mgmt"
+	"github.com/bocodigitalmedia/go-auth0/auth0mgmt"
 )
 
 const ServicePath = "resource-servers"

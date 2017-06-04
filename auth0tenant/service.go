@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/bocodigitalmedia/auth0/auth0mgmt"
+	"github.com/bocodigitalmedia/go-auth0/auth0mgmt"
 )
 
 const ServicePath = "tenants/settings"
