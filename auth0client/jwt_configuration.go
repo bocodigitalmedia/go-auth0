@@ -1,7 +1,7 @@
 package auth0client
 
 type JwtConfiguration struct {
-	LifetimeInSeconds Int64OrNil              `json:"lifetime_in_seconds,omitempty"`
+	LifetimeInSeconds interface{}             `json:"lifetime_in_seconds,omitempty"`
 	Scopes            *map[string]interface{} `json:"scopes,omitempty"`
 	Alg               JwtConfigurationAlg     `json:"alg,omitempty"`
 }

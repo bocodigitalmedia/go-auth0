@@ -1,6 +1,6 @@
 package auth0client
 
 type EncryptionKey struct {
-	Pub  StringOrNil `json:"pub,omitempty"`
-	Cert StringOrNil `json:"cert,omitempty"`
+	Pub  interface{} `json:"pub,omitempty"`
+	Cert interface{} `json:"cert,omitempty"`
 }
