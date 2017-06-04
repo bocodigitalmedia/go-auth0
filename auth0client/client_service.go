@@ -46,6 +46,13 @@ func (s *Service) Delete(id string) (*http.Response, error) {
 	return resp, err
 }
 
+func (s *Service) RotateSecret(id string) (*Client, *http.Response, error) {
+	path := fmt.Sprintf("%s/%s/rotate-secret", s.basePath, id)
+	result := new(Client)
+	resp, err := s.api.Post(path, nil, result)
+	return result, resp, err
+}
+
 const ServiceBasePath = "clients"
 
 type NewServiceParams struct {
