@@ -1,9 +1,7 @@
 package auth0mgmt
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -11,8 +9,8 @@ import (
 )
 
 type Api struct {
-	sling *sling.Sling
-	token string
+	sling         *sling.Sling
+	authorization string
 }
 
 type Result interface{}
@@ -21,8 +19,7 @@ type Params interface{}
 type SlingDecorator func(*sling.Sling) *sling.Sling
 
 func (s *Api) Base() *sling.Sling {
-	authorization := fmt.Sprintf("Bearer %s", s.token)
-	return s.sling.New().Set("Authorization", authorization)
+	return s.sling.New().Set("Authorization", s.authorization)
 }
 
 func (s *Api) Receive(decorate SlingDecorator, result *interface{}) (*http.Response, error) {
@@ -31,11 +28,6 @@ func (s *Api) Receive(decorate SlingDecorator, result *interface{}) (*http.Respo
 	resp, err := base.Receive(result, apiErr)
 
 	if err == nil && !apiErr.IsEmpty() {
-		b, _ := json.MarshalIndent(apiErr, "", "\t")
-
-		log.Println(apiErr)
-		log.Println(string(b))
-		log.Printf("[ERROR] %s", apiErr.Error())
 		err = apiErr
 	}
 
@@ -82,6 +74,7 @@ type NewApiParams struct {
 
 func NewApi(params *NewApiParams) *Api {
 	baseUrl := fmt.Sprintf("https://%s/api/v2/", params.Domain)
+	authorization := fmt.Sprintf("Bearer %s", params.AccessToken)
 	httpClient := params.HttpClient
 
 	if httpClient == nil {
@@ -89,7 +82,7 @@ func NewApi(params *NewApiParams) *Api {
 	}
 
 	return &Api{
-		sling: sling.New().Base(baseUrl).Client(httpClient),
-		token: params.AccessToken,
+		sling:         sling.New().Base(baseUrl).Client(httpClient),
+		authorization: authorization,
 	}
 }
