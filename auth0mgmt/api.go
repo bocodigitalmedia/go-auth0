@@ -44,7 +44,7 @@ func (s *Api) Get(path string, params, result interface{}) (*http.Response, erro
 
 func (s *Api) Post(path string, params, result interface{}) (*http.Response, error) {
 	decorate := func(s *sling.Sling) *sling.Sling {
-		return s.Post(path).BodyJSON(&params)
+		return s.Post(path).BodyJSON(params)
 	}
 
 	return s.Receive(decorate, &result)
@@ -52,7 +52,7 @@ func (s *Api) Post(path string, params, result interface{}) (*http.Response, err
 
 func (s *Api) Patch(path string, params, result interface{}) (*http.Response, error) {
 	decorate := func(s *sling.Sling) *sling.Sling {
-		return s.Patch(path).BodyJSON(&params)
+		return s.Patch(path).BodyJSON(params)
 	}
 
 	return s.Receive(decorate, &result)
@@ -60,7 +60,7 @@ func (s *Api) Patch(path string, params, result interface{}) (*http.Response, er
 
 func (s *Api) Delete(path string, params, result interface{}) (*http.Response, error) {
 	decorate := func(s *sling.Sling) *sling.Sling {
-		return s.Delete(path).QueryStruct(&params)
+		return s.Delete(path).QueryStruct(params)
 	}
 
 	return s.Receive(decorate, &result)
