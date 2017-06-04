@@ -1,4 +1,4 @@
-package auth0tenantsettings
+package auth0tenant
 
 type Settings struct {
 	ChangePassword    *ChangePassword  `json:"change_password,omitempty"`

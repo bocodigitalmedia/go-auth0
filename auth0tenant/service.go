@@ -1,4 +1,4 @@
-package auth0tenantsettings
+package auth0tenant
 
 import (
 	"net/http"
@@ -18,21 +18,21 @@ func (s *Service) Path(paths ...string) string {
 	return strings.Join(strs, "/")
 }
 
-func (s *Service) Read(params *ReadParams) (*Settings, *http.Response, error) {
+func (s *Service) ReadSettings(params *ReadSettingsParams) (*Settings, *http.Response, error) {
 	path := s.Path()
 	result := new(Settings)
 	resp, err := s.Api.Get(path, params, result)
 	return result, resp, err
 }
 
-func (s *Service) Update(params *Settings) (*Settings, *http.Response, error) {
+func (s *Service) UpdateSettings(params *Settings) (*Settings, *http.Response, error) {
 	path := s.Path()
 	result := new(Settings)
 	resp, err := s.Api.Patch(path, params, result)
 	return result, resp, err
 }
 
-type ReadParams struct {
+type ReadSettingsParams struct {
 	Fields        interface{} `url:"fields,omitempty"`
 	IncludeFields interface{} `url:"include_fields,omitempty"`
 }
