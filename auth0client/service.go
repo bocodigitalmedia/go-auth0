@@ -1,8 +1,6 @@
 package auth0client
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 	"strings"
 
@@ -20,18 +18,9 @@ func (s *Service) Path(paths ...string) string {
 	return strings.Join(strs, "/")
 }
 
-func (s *Service) List(params *ListParams) (*ClientList, *http.Response, error) {
-	if params == nil {
-		params = new(ListParams)
-	}
-
-	params.IncludeTotals = true
-
-	b, _ := json.MarshalIndent(params, "", "\t")
-	log.Println("LIST_PARAMS: ", string(b))
-
+func (s *Service) List(params *ListParams) (*[]Client, *http.Response, error) {
 	path := s.Path()
-	result := new(ClientList)
+	result := new([]Client)
 	resp, err := s.Api.Get(path, params, result)
 
 	return result, resp, err
@@ -72,11 +61,10 @@ func (s *Service) RotateSecret(id string) (*Client, *http.Response, error) {
 }
 
 type ListParams struct {
-	Page          interface{} `url:"page,omitempty"`
-	PerPage       interface{} `url:"per_page,omitempty"`
+	Page          int64       `url:"page,omitempty"`
+	PerPage       int64       `url:"per_page,omitempty"`
 	Fields        interface{} `url:"fields,omitempty"`
 	IncludeFields interface{} `url:"include_fields,omitempty"`
-	IncludeTotals bool        `url:"include_totals"`
 }
 
 type ReadParams struct {

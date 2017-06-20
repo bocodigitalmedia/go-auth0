@@ -6,8 +6,8 @@ type Mobile struct {
 }
 
 type MobileAndroid struct {
-	AppPackageName         interface{} `json:"app_package_name,omitempty"`
-	Sha256CertFingerprints *[]string   `json:"sha256_cert_fingerprints,omitempty"`
+	AppPackageName         interface{}    `json:"app_package_name,omitempty"`
+	Sha256CertFingerprints *[]interface{} `json:"sha256_cert_fingerprints,omitempty"`
 }
 
 type MobileIos struct {

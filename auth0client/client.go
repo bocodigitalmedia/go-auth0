@@ -15,14 +15,14 @@ type Properties struct {
 	Name                    interface{}             `json:"name,omitempty"`
 	Description             interface{}             `json:"description,omitempty"`
 	LogoUri                 interface{}             `json:"logo_uri,omitempty"`
-	Callbacks               *[]string               `json:"callbacks,omitempty"`
-	AllowedOrigins          *[]string               `json:"allowed_origins,omitempty"`
-	ClientAliases           *[]string               `json:"client_aliases,omitempty"`
-	AllowedClients          *[]string               `json:"allowed_clients,omitempty"`
-	AllowedLogoutUrls       *[]string               `json:"allowed_logout_urls,omitempty"`
-	GrantTypes              *[]string               `json:"grant_types",omitempty`
-	TokenEndpointAuthMethod TokenEndpointAuthMethod `json:"token_endpoint_auth_method,omitempty"`
-	AppType                 AppType                 `json:"app_type,omitempty"`
+	Callbacks               *[]interface{}          `json:"callbacks,omitempty"`
+	AllowedOrigins          *[]interface{}          `json:"allowed_origins,omitempty"`
+	ClientAliases           *[]interface{}          `json:"client_aliases,omitempty"`
+	AllowedClients          *[]interface{}          `json:"allowed_clients,omitempty"`
+	AllowedLogoutUrls       *[]interface{}          `json:"allowed_logout_urls,omitempty"`
+	GrantTypes              *[]interface{}          `json:"grant_types,omitempty"`
+	TokenEndpointAuthMethod interface{}             `json:"token_endpoint_auth_method,omitempty"`
+	AppType                 interface{}             `json:"app_type,omitempty"`
 	OidcConformant          interface{}             `json:"oidc_conformant,omitempty"`
 	JwtConfiguration        *JwtConfiguration       `json:"jwt_configuration,omitempty"`
 	EncryptionKey           *EncryptionKey          `json:"encryption_key,omitempty"`
@@ -36,8 +36,6 @@ type Properties struct {
 	FormTemplate            interface{}             `json:"form_template,omitempty"`
 	IsHerokuApp             interface{}             `json:"is_heroku_app,omitempty"`
 	Addons                  *Addons                 `json:"addons,omitempty"`
-	ClientMetadata          *ClientMetadata         `json:"client_metadata,omitempty"`
+	ClientMetadata          *map[string]interface{} `json:"client_metadata,omitempty"`
 	Mobile                  *Mobile                 `json:"mobile,omitempty"`
 }
-
-type ClientMetadata map[string]interface{}
